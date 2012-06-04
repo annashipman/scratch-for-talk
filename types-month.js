@@ -8,25 +8,33 @@ function renderTypesByMonth(paper){
 	var xPos = 75;
 	var yPos = 75;
 
-	var numberOfFeatures = countCards(year, 1, "MMF");
-	var numberOfBugs = countCards(year, 1, "Bug");
-	var numberOfMaintenanceTasks = countCards(year, 1, "Bug");
-	var numberOfInfrastructureTasks = countCards(year, 1, "Bug");
+	drawPieForAMonth(paper, year, month, xPos, yPos, radius ,colorPalette);
+
+}
+
+function drawPieForAMonth(paper, year, month, xPos, yPos, radius, colorPalette){
+	
+	var numberOfFeatures = countCards(year, month, "MMF");
+	var numberOfBugs = countCards(year, month, "Bug");
+	var numberOfMaintenanceTasks = countCards(year, month, "Bug");
+	var numberOfInfrastructureTasks = countCards(year, month, "Bug");
 
 	var data = [numberOfFeatures, numberOfBugs, numberOfMaintenanceTasks, numberOfInfrastructureTasks];
 	pie = paper.piechart(xPos, yPos, radius, data , {colors: colorPalette, label: data});
 	pie.hover(hoverIn, hoverOut);
+	
 	paper.text(xPos, yPos +radius + 10, moment.monthsShort[0] + " " + year  )
 }
 
 function hoverIn(){
-	//stop scale animation
+	//stop scale animation if it already exists
 	this.sector.stop();
 	//create a popup and add to the flag object so we can clear it later
 	this.flag = paper.popup(this.mx, this.my, this.value.value)
 				.attr({
 						fill: "0-#c9de96-#8ab66b:44-#398235",
 						stroke: "#000"});
+	//how big the slice expands
 	this.sector.scale(1.5, 1.5, this.cx, this.cy);
 	
     if (this.label) {
