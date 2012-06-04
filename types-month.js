@@ -2,13 +2,34 @@ function renderTypesByMonth(paper){
 
 	var colorPalette = ["#225533" ,"#44bbcc" ,"#88dddd" ,"#bbeeff"];
 
-	var year = 2010;
-	var month = 1;
 	var radius = 25;
-	var xPos = 75;
-	var yPos = 75;
+	var spacing = 55;
 
-	drawPieForAMonth(paper, year, month, xPos, yPos, radius ,colorPalette);
+	var xOffSet = 1;
+	var yOffSet = 1;
+	
+	var xPos = (radius + spacing) * xOffSet;
+	var yPos = (radius + spacing) * yOffSet;
+
+	for(var year = 2010; year <=2012; year++){
+		for(var month = 1; month <=12; month++){
+			//increment the xPos by the spacing and multiply by how much we need to move to the right
+			xPos = (radius + spacing) * xOffSet;
+			drawPieForAMonth(paper, year, month, xPos, yPos, radius ,colorPalette);
+			xOffSet++;
+			//draw a new line every 6 months
+			//increment the yPos every 6 months to move the next line down
+				if(month%6 == 0){
+				yOffSet++;
+				yPos = (radius + spacing) * yOffSet;
+				xPos = 20;
+				xOffSet = 1;
+				
+			}
+		}
+	}
+
+	
 
 }
 
@@ -23,7 +44,7 @@ function drawPieForAMonth(paper, year, month, xPos, yPos, radius, colorPalette){
 	pie = paper.piechart(xPos, yPos, radius, data , {colors: colorPalette, label: data});
 	pie.hover(hoverIn, hoverOut);
 	
-	paper.text(xPos, yPos +radius + 10, moment.monthsShort[0] + " " + year  )
+	paper.text(xPos, yPos +radius + 10, moment.monthsShort[month - 1] + " " + year  )
 }
 
 function hoverIn(){
