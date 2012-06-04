@@ -1,14 +1,21 @@
 function renderTypesByMonth(paper){
 
 	var colorPalette = ["#225533" ,"#44bbcc" ,"#88dddd" ,"#bbeeff"];
-	var numberOfFeatures = countCards(2010, 1, "MMF");
-	var numberOfBugs = countCards(2010, 1, "Bug");
-	var numberOfMaintenanceTasks = countCards(2010, 1, "Bug");
-	var numberOfInfrastructureTasks = countCards(2010, 1, "Bug");
+
+	var year = 2010;
+	var month = 1;
+	var radius = 25;
+	var xPos = 75;
+	var yPos = 75;
+
+	var numberOfFeatures = countCards(year, 1, "MMF");
+	var numberOfBugs = countCards(year, 1, "Bug");
+	var numberOfMaintenanceTasks = countCards(year, 1, "Bug");
+	var numberOfInfrastructureTasks = countCards(year, 1, "Bug");
 
 	var data = [numberOfFeatures, numberOfBugs, numberOfMaintenanceTasks, numberOfInfrastructureTasks];
-	pie = paper.piechart(75, 75, 25, data , {colors: colorPalette, label: data});
-	paper.text(75, 110, moment.monthsShort[0] + " " + 2010  )
+	pie = paper.piechart(xPos, yPos, radius, data , {colors: colorPalette, label: data});
+	paper.text(xPos, yPos +radius + 10, moment.monthsShort[0] + " " + year  )
 }
 
 function countCards(year, month, cardType){
