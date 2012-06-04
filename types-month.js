@@ -29,6 +29,16 @@ function renderTypesByMonth(paper){
 		}
 	}
 
+	//draw the legend after the bottom row
+	xPos = (radius + spacing) * xOffSet;
+	var legendOptions = { 
+		legend: ["Features", "Bugs", "Infrastructure", "Maintenance"], //legend labels
+		legendpos: "east",  //legend position
+		label: [25, 25, 25, 25], //since the legend is a pie chart, set some values
+		 colors: colorPalette}
+	pie = paper.piechart(xPos, yPos+ 50, radius, [25, 25, 25, 25], legendOptions);
+	pie.hover(hoverIn, hoverOut);
+
 	
 
 }
