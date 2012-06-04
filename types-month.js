@@ -6,8 +6,8 @@ function renderTypesByMonth(paper){
 	var numberOfMaintenanceTasks = countCards(2010, 1, "Bug");
 	var numberOfInfrastructureTasks = countCards(2010, 1, "Bug");
 
-
-	pie = paper.piechart(75, 75, 25, [numberOfFeatures, numberOfBugs, numberOfMaintenanceTasks, numberOfInfrastructureTasks], {colors: colorPalette});
+	var data = [numberOfFeatures, numberOfBugs, numberOfMaintenanceTasks, numberOfInfrastructureTasks];
+	pie = paper.piechart(75, 75, 25, data , {colors: colorPalette, label: data});
 	paper.text(75, 110, moment.monthsShort[0] + " " + 2010  )
 }
 
