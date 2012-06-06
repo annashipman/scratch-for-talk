@@ -9,7 +9,7 @@ class DataSorter
   end
 
   def read_and_split_into_arrays
-    file = File.open("alldata.csv", "r")
+    file = File.open("../alldata.csv", "r")
     @headers = file.gets.chomp.split(',')
 
     file.each_line do |row|
