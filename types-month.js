@@ -1,5 +1,12 @@
-function renderTypesByMonth(paper){
+function renderTypesByMonth(g){
 
+	
+	//parses the json
+	//stores in the form of
+	// CardData.year.month.Features
+	var cardTypesPerMonth =  new CardData(teamData);
+	
+	
 	var colorPalette = ["#225533" ,"#44bbcc" ,"#88dddd" ,"#bbeeff"];
 
 	var radius = 25;
@@ -15,17 +22,24 @@ function renderTypesByMonth(paper){
 		for(var month = 1; month <=12; month++){
 			//increment the xPos by the spacing and multiply by how much we need to move to the right
 			xPos = (radius + spacing) * xOffSet;
-			drawPieForAMonth(paper, year, month, xPos, yPos, radius ,colorPalette);
-			xOffSet++;
-			//draw a new line every 6 months
-			//increment the yPos every 6 months to move the next line down
-				if(month%6 == 0){
-				yOffSet++;
-				yPos = (radius + spacing) * yOffSet;
-				xPos = 20;
-				xOffSet = 1;
-				
-			}
+
+			var numberOfFeatures = cardTypesPerMonth.countFor(year, month -1, "Feature");
+			var numberOfBugs = cardTypesPerMonth.countFor(year, month - 1, "Bug");
+			var numberOfMaintenanceTasks = cardTypesPerMonth.countFor(year, month -1, "Build Maintenance");
+			var numberOfInfrastructureTasks = cardTypesPerMonth.countFor(year, month -1, "Infrastructure");
+
+			var data = [numberOfFeatures, numberOfBugs, numberOfMaintenanceTasks, numberOfInfrastructureTasks];
+			drawPieForAMonth(g, year, month, xPos, yPos, radius, data ,colorPalette);
+					xOffSet++;
+					//draw a new line every 6 months
+					//increment the yPos every 6 months to move the next line down
+						if(month%6 == 0){
+						yOffSet++;
+						yPos = (radius + spacing) * yOffSet;
+						xPos = 20;
+						xOffSet = 1;
+						
+					}
 		}
 	}
 
@@ -36,32 +50,27 @@ function renderTypesByMonth(paper){
 		legendpos: "east",  //legend position
 		label: [25, 25, 25, 25], //since the legend is a pie chart, set some values
 		 colors: colorPalette}
-	pie = paper.piechart(xPos, yPos+ 50, radius, [25, 25, 25, 25], legendOptions);
+	pie = g.piechart(xPos, yPos+ 50, radius, [25, 25, 25, 25], legendOptions);
 	pie.hover(hoverIn, hoverOut);
 
 	
 
 }
 
-function drawPieForAMonth(paper, year, month, xPos, yPos, radius, colorPalette){
+function drawPieForAMonth(g, year, month, xPos, yPos, radius, data, colorPalette){
 	
-	var numberOfFeatures = countCards(year, month, "MMF");
-	var numberOfBugs = countCards(year, month, "Bug");
-	var numberOfMaintenanceTasks = countCards(year, month, "Bug");
-	var numberOfInfrastructureTasks = countCards(year, month, "Bug");
-
-	var data = [numberOfFeatures, numberOfBugs, numberOfMaintenanceTasks, numberOfInfrastructureTasks];
-	pie = paper.piechart(xPos, yPos, radius, data , {colors: colorPalette, label: data});
+	
+	pie = g.piechart(xPos, yPos, radius, data , {colors: colorPalette, label: data});
 	pie.hover(hoverIn, hoverOut);
 	
-	paper.text(xPos, yPos +radius + 10, moment.monthsShort[month - 1] + " " + year  )
+	g.text(xPos, yPos +radius + 10, moment.monthsShort[month - 1] + " " + year  )
 }
 
 function hoverIn(){
 	//stop scale animation if it already exists
 	this.sector.stop();
 	//create a popup and add to the flag object so we can clear it later
-	this.flag = paper.popup(this.mx, this.my, this.value.value)
+	this.flag = r.popup(this.mx, this.my, this.value.value)
 				.attr({
 						fill: "0-#c9de96-#8ab66b:44-#398235",
 						stroke: "#000"});
@@ -84,18 +93,6 @@ function hoverOut(){
     }
  }
 
-function countCards(year, month, cardType){
-	//count the number of entries, that were created on Option
-	//month is zero based so subtract 1
-	 return teamData.filter(
-    						function(e, index, arr){
-    							var raisedOn = moment(e["Option"], "DD/MM/YYYY");
-    								return (
-    									e["Type"] === cardType  && 
-    										raisedOn.month() == (month - 1) &&
-    										raisedOn.year() == year
-    										);
-    									}
-    								).length;
-}
+
+
 			

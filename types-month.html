@@ -8,10 +8,9 @@
 <script type="text/javascript" src="lib/raphael-min.js"></script> 
 <script type="text/javascript" src="lib/g.raphael.js"></script> 
 <script type="text/javascript" src="lib/g.pie.js"></script> 
-<script type="text/javascript" src="lib/g.bar.js"></script> 
-<script type="text/javascript" src="lib/g.line.js"></script> 
 <script type="text/javascript" src="data/team_data.json"></script>
 <script type="text/javascript" src="types-month.js"></script>
+<script type="text/javascript" src="card_data.js"></script>
 <script type="text/javascript" src="lib/moment.min.js"></script>
 </head>
 <body >
@@ -21,12 +20,13 @@
 
 <script type="text/javascript">
 
-paper = document.getElementById('graph-paper');
-var paper = Raphael(20, 20, 1000, 800);
-renderTypesByMonth(paper);
+
+var r = Raphael(20, 20, 1000, 800);
+renderTypesByMonth(r);
 
 
    
 </script>
+
 </body>
 </html>
