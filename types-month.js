@@ -1,4 +1,4 @@
-function renderTypesByMonth(g){
+function renderTypesByMonth(){
 
 	
 	//parses the json
@@ -29,7 +29,7 @@ function renderTypesByMonth(g){
 			var numberOfInfrastructureTasks = cardTypesPerMonth.countFor(year, month -1, "Infrastructure");
 
 			var data = [numberOfFeatures, numberOfBugs, numberOfMaintenanceTasks, numberOfInfrastructureTasks];
-			drawPieForAMonth(g, year, month, xPos, yPos, radius, data ,colorPalette);
+			drawPieForAMonth(year, month, xPos, yPos, radius, data ,colorPalette);
 					xOffSet++;
 					//draw a new line every 6 months
 					//increment the yPos every 6 months to move the next line down
@@ -50,20 +50,20 @@ function renderTypesByMonth(g){
 		legendpos: "east",  //legend position
 		label: [25, 25, 25, 25], //since the legend is a pie chart, set some values
 		 colors: colorPalette}
-	pie = g.piechart(xPos, yPos+ 50, radius, [25, 25, 25, 25], legendOptions);
+	pie = r.piechart(xPos, yPos+ 50, radius, [25, 25, 25, 25], legendOptions);
 	pie.hover(hoverIn, hoverOut);
 
 	
 
 }
 
-function drawPieForAMonth(g, year, month, xPos, yPos, radius, data, colorPalette){
+function drawPieForAMonth(year, month, xPos, yPos, radius, data, colorPalette){
 	
 	
-	pie = g.piechart(xPos, yPos, radius, data , {colors: colorPalette, label: data});
+	pie = r.piechart(xPos, yPos, radius, data , {colors: colorPalette, label: data});
 	pie.hover(hoverIn, hoverOut);
 	
-	g.text(xPos, yPos +radius + 10, moment.monthsShort[month - 1] + " " + year  )
+	r.text(xPos, yPos +radius + 10, moment.monthsShort[month - 1] + " " + year  )
 }
 
 function hoverIn(){
