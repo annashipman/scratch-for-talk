@@ -3,7 +3,9 @@ function CardData(data){
 	//count the number of entries, that were created on Option
 	var cardData = this;
 	data.forEach(function(e, index, arr){
-		var raisedOn = moment(e["In Backlog"], "DD/MM/YYYY");
+
+		if(e["In Production"] && e["Application Name"] =="Project A" && e["Cycle Time"] > 1){
+		var raisedOn = moment(e["In Production"], "DD/MM/YYYY");
 		var month = raisedOn.month();
 		var year = raisedOn.year();
 		var cardType = e["Type"];
@@ -13,14 +15,18 @@ function CardData(data){
 		if(cardData[year][month][cardType] == undefined) cardData[year][month][cardType] = 0;
 
 		cardData[raisedOn.year()][month][cardType] ++;
+	}
+
 
 
 	});
+
+
+
 	
 
 	
 }
-
 
 
 CardData.prototype.countFor = function (year, month, cardType){

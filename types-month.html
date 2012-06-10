@@ -8,6 +8,7 @@
 <script type="text/javascript" src="lib/raphael-min.js"></script> 
 <script type="text/javascript" src="lib/g.raphael.js"></script> 
 <script type="text/javascript" src="lib/g.pie.js"></script> 
+<script type="text/javascript" src="lib/g.line.js"></script> 
 <script type="text/javascript" src="data/team_data.json"></script>
 <script type="text/javascript" src="types-month.js"></script>
 <script type="text/javascript" src="card_data.js"></script>
@@ -21,7 +22,9 @@
 <script type="text/javascript">
 
 
-var r = Raphael(20, 20, 1000, 800);
+var r = Raphael(20, 20, 600, 800);
+
+var r2 = Raphael(620, 20, 600, 800);
 renderTypesByMonth(r);
 
 
