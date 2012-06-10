@@ -1,0 +1,143 @@
+Blank canvas
+------------
+
+   var sb = new $jit.Sunburst({
+        injectInto: 'infovis',
+        Node: {
+          overridable: true,
+        },
+    });
+
+
+    sb.loadJSON(json);
+    sb.refresh(); 
+
+
+Make it fit into the box
+---------------------------
+        levelDistance: 90,
+
+
+
+Add some labels
+---------------
+
+Label: {
+          type: 'Native'
+        },
+
+
+Bung some details on the right
+------------------------------
+
+Events: {
+          enable: true,
+          onClick: function(node) {
+            if(!node) return;
+            var html = "<h4>" + node.name + "</h4>", data = node.data;
+            if("type" in data) {
+              html += "<b>Type: </b> " + data.type;
+            }
+            if("startDate" in data) {
+              html += "<br /><br /><b>Work started on: </b> " + data.startDate;
+            }
+            if("endDate" in data) {
+              html += "<br /><br /><b>In production on: </b><br />" + data.endDate;
+            }
+            if("description" in data) {
+              html += data.description;
+            }
+            $jit.id('inner-details').innerHTML = html;
+          }
+        },
+
+
+Add some tooltips
+-----------------
+        Tips: {
+          enable: true,
+          onShow: function(tip, node) {
+            var html = "<div class=\"tip-title\">" + node.name + "</div>"; 
+            var data = node.data;
+            if("timeTaken" in data) {
+              html += "<b>Time Taken:</b> " + data.timeTaken + " days";
+            }
+            tip.innerHTML = html;
+          }
+        },
+
+
+Rotate
+------
+(NB - goes into events)
+
+sb.rotate(node, animate? 'animate' : 'replot', {
+              duration: 1000,
+              transition: $jit.Trans.Quart.easeInOut
+            });
+
+http://thejit.org/static/v20/Docs/files/Options/Options-Fx-js.html#$jit.Trans
+
+Hide tip afterwards
+-------------------
+(i.e. before rotate)
+
+sb.tips.hide();
+           
+
+Change styles when hovering and clicking nodes
+----------------------------------------------
+        NodeStyles: {
+          enable: true,
+          type: 'Native',
+          stylesClick: {
+            'color': '#33dddd'
+          },
+          stylesHover: {
+            'color': '#dd3333'
+          }
+        }, 
+
+
+TODO demo how to put all data into another jit chart
+
+
+Notes extra to demo
+-------------------
+
+In general, a lot of this stuff we don't need for today's demo, but there's stuff to do with iPhones, etc. Quite clever if you need it all, but we don't.
+
+var labelType, useGradients, nativeTextSupport, animate;
+
+(function() {
+  var ua = navigator.userAgent,
+      iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
+      typeOfCanvas = typeof HTMLCanvasElement,
+      nativeCanvasSupport = (typeOfCanvas == 'object' || typeOfCanvas == 'function'),
+      textSupport = nativeCanvasSupport 
+        && (typeof document.createElement('canvas').getContext('2d').fillText == 'function');
+  //I'm setting this based on the fact that ExCanvas provides text support for IE
+  //and that as of today iPhone/iPad current text support is lame
+  labelType = (!nativeCanvasSupport || (textSupport && !iStuff))? 'Native' : 'HTML';
+  nativeTextSupport = labelType == 'Native';
+  useGradients = nativeCanvasSupport;
+  animate = !(iStuff || !nativeCanvasSupport);
+})();
+
+Could use gradients
+
+To use gradients:
+-----------------
+
+var useGradients, 
+
+(function() {
+    typeOfCanvas = typeof HTMLCanvasElement,
+    useGradients = (typeOfCanvas == 'object' || typeOfCanvas == 'function');
+})();
+
+In Node, 
+
+       type: useGradients? 'gradient-multipie' : 'multipie'
+
+
