@@ -63,4 +63,32 @@ function drawPieForAMonth(year, month, xPos, yPos, radius, data, colors) {
 
 
 	r.text(xPos, yPos + radius + 10, moment.monthsShort[month - 1] + " " + year)
+	pie.hover(hoverIn, hoverOut);
 }
+
+function hoverIn(){
+	//stop scale animation if it already exists
+	this.sector.stop();
+	//create a popup and add to the flag object so we can clear it later
+	this.flag = r.popup(this.mx, this.my, this.value.value)
+				.attr({
+						fill: "0-#c9de96-#8ab66b:44-#398235",
+						stroke: "#000"});
+	//how big the slice expands
+	this.sector.scale(1.5, 1.5, this.cx, this.cy);
+	
+    if (this.label) {
+        this.label[0].stop();
+        this.label[0].attr({ r: 7.5 });
+        this.label[1].attr({ "font-weight": 800 });
+    }
+ }
+
+function hoverOut(){
+	this.flag.animate({opacity: 0}, 300, function () {this.remove();});
+	this.sector.animate({ transform: 's1 1 ' + this.cx + ' ' + this.cy }, 500, "bounce");
+	if (this.label) {
+    	this.label[0].animate({ r: 5 }, 500, "bounce");
+        this.label[1].attr({ "font-weight": 400 });
+    }
+ }
