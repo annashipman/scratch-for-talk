@@ -4,7 +4,7 @@ function CardData(data){
 	var cardData = this;
 	data.forEach(function(e, index, arr){
 
-		if(e["In Production"] && e["Application Name"] =="Project A" && e["Cycle Time"] > 1){
+		if(e["In Production"]  ){
 		var raisedOn = moment(e["In Production"], "DD/MM/YYYY");
 		var month = raisedOn.month();
 		var year = raisedOn.year();
@@ -21,7 +21,7 @@ function CardData(data){
 
 	});
 
-
+console.log(cardData);
 
 	
 

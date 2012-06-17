@@ -38,6 +38,7 @@ function renderTypesByMonth(){
 		var numberOfInfrastructureTasks = cardTypesPerMonth.countFor(year, month -1, "Infrastructure");
 
 		var data = [numberOfFeatures, numberOfBugs, numberOfMaintenanceTasks, numberOfInfrastructureTasks]; 
+	
 		fs.push(numberOfFeatures);
 		b.push(numberOfBugs);
 		m.push(numberOfMaintenanceTasks);
