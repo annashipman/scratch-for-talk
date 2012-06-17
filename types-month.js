@@ -19,17 +19,35 @@ function renderTypesByMonth() {
 	var xPos = (radius + spacing) * xOffSet;
 	var yPos = (radius + spacing) * yOffSet;
 
-	
-	var year = 2012;
-	var month = 1;
 
-	var numberOfFeatures = cardTypesPerMonth.countFor(year, month - 1, "Feature");
-	var numberOfBugs = cardTypesPerMonth.countFor(year, month - 1, "Bug");
-	var numberOfMaintenanceTasks = cardTypesPerMonth.countFor(year, month - 1, "Build Maintenance");
-	var numberOfInfrastructureTasks = cardTypesPerMonth.countFor(year, month - 1, "Infrastructure");
 
-	var data = [numberOfFeatures, numberOfBugs, numberOfMaintenanceTasks, numberOfInfrastructureTasks];
-	drawPieForAMonth(year, month, xPos, yPos, radius, data, colors );
+	for (var year = 2010; year <= 2012; year++) {
+		for (var month = 1; month <= 12; month++) {
+			//increment the xPos by the spacing and multiply by how much we need to move to the right
+			xPos = (radius + spacing) * xOffSet;
+
+			var numberOfFeatures = cardTypesPerMonth.countFor(year, month - 1, "Feature");
+			var numberOfBugs = cardTypesPerMonth.countFor(year, month - 1, "Bug");
+			var numberOfMaintenanceTasks = cardTypesPerMonth.countFor(year, month - 1, "Build Maintenance");
+			var numberOfInfrastructureTasks = cardTypesPerMonth.countFor(year, month - 1, "Infrastructure");
+
+			var data = [numberOfFeatures, numberOfBugs, numberOfMaintenanceTasks, numberOfInfrastructureTasks];
+			drawPieForAMonth(year, month, xPos, yPos, radius, data, colors);
+
+			xOffSet++;
+			//draw a new line every 6 months
+			//increment the yPos every 6 months to move the next line down
+			if (month % 6 == 0) {
+				yOffSet++;
+				yPos = (radius + spacing) * yOffSet;
+				xPos = 20;
+				xOffSet = 1;
+
+			}
+
+
+		}
+	}
 
 
 
