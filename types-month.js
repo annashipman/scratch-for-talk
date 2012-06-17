@@ -15,6 +15,12 @@ function renderTypesByMonth(){
 	var xPos = (radius + spacing) * xOffSet;
 	var yPos = (radius + spacing) * yOffSet;
 
+	var data = [25, 25, 25, 25];
+	var year = 2012;
+	var month = 1;
+
+	drawPieForAMonth(year, month, xPos, yPos, radius, data, colors );
+
 
 
 }
