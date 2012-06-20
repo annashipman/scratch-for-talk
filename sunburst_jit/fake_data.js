@@ -1,7 +1,7 @@
 var json = 
     {
     "id":"Parent",
-    "name":"All Projects",
+    "name":"World",
     "data": 
         {
         "$type":"none"
