@@ -17,13 +17,13 @@ class DataSorter
 
   # [ id, comment, color, country_color ]
   CONTINENT_PROPERTIES = [
-    [ "Africa", "A comment about Africa", "#225533", "#9caf84" ],
-    [ "Asia", "A comment about Asia", "#3366FF", "#44bbcc"],
-    [ "Europe", "some stuff about Europe...",  "#7aa25c", "#9caf84" ],
-    [ "North America", "some stuff about North America", "#d84b2a", "#ee9586" ],
-    [ "South America", "some stuff about South America", "#3366FF", "#BD7AFF" ],
+    [ "Africa", "A comment about Africa", "#225533", "#225533" ],
+    [ "Asia", "A comment about Asia", "#3366FF", "#3366FF"],
+    [ "Europe", "some stuff about Europe...",  "#7aa25c", "#7aa25c"],
+    [ "North America", "some stuff about North America", "#d84b2a", "#d84b2a" ],
+    [ "South America", "some stuff about South America", "#3366FF",  "#3366FF"],
     [ "Oceania", "A geopolitical region which includes the continent of Australia and the Pacific Islands",
-      "#CCC", "#999" ]
+      "#CCC", "#CCC"]
   ]
 
   def initialize(csv_path)
