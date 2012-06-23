@@ -1,1 +1,14 @@
-Create the raphael canvas
+Create the raphael holder
+-------------------------
+
+    var r = Raphael("holder");
+    r.piechart(125, 125, 100, [10,10,25,50])
+    
+Let's change the default colours
+---------------------------------
+   
+   //add var
+   colours = ["#225533", "#44bbcc", "#88dddd", "#bbeeff"];
+   
+   //add colours to the option last property
+   r.piechart(125, 125, 100, [10,10,25,50], {colors:colours})
