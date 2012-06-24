@@ -91,8 +91,64 @@ offset
    
 pop down a row every six months
 --------------------------------
-    
+    line = 1,
+    x = 50,
+    pieSpacing = radius + 55,
+    y = pieSpacing * line,
 
+        x += pieSpacing;
+        
+        if ((month+1) % 6 == 0) {
+            x = 50;
+            line++;
+			y = pieSpacing * line;
+		}
+
+add a legend after the last line
+--------------------------------
+
+    
+    x += pieSpacing;
+    line++;
+    y = pieSpacing * line;
+	var legendOptions = { 
+		legend: ["Features", "Bugs", "Infrastructure", "Maintenance"], 
+		legendpos: "east",  
+		label: [25, 25, 25, 25], 
+		colors: colours}
+	pie = r.piechart(x, y, radius, [25, 25, 25, 25], legendOptions);
+    
+ideally we want to know what they represent
+-------------------------------------------
+
+add hover in and hover out.
+
+hmm. ok how about a stacked chart as well
+-----------------------------------------
+
+make the canvas wider
+------------------------
+
+    var r = Raphael("holder", 2000, 800), 
+    
+include barchart
+----------------
+
+OK - could do this: 
+
+	//(x_start, y_start, x_width, from, to, steps, orientation, labels, type, dashsize)
+	Raphael.g.axis(825,230,310,null,null,4,2,["Today", "Yesterday", "Tomorrow", "Future"], "|", 0, r)
+	
+	//data2 = [[55, 20, 13, 32, 5, 1, 2, 10], [10, 2, 1, 5, 32, 13, 20, 55], [12, 20, 30]],
+	//r.barchart(825, 150, 300, 220, data2, {stacked: true});
+    
+    
+But haven't figured out the axes. For now, a line graph:
+
+include linegraph
+-----------------
+
+<script type="text/javascript" src="lib/g.line.js"></script>
     
     
     
