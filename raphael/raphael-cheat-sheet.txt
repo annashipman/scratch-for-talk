@@ -1,7 +1,7 @@
 Create the raphael holder
 -------------------------
 
-    var r = Raphael("holder");
+    var r = Raphael("holder", 600, 800);
     r.piechart(125, 125, 100, [10,10,25,50])
     
 Let's change the default colours
@@ -12,3 +12,67 @@ Let's change the default colours
    
    //add colours to the option last property
    r.piechart(125, 125, 100, [10,10,25,50], {colors:colours})
+   
+   
+Now to sort the data
+--------------------
+
+hmmm... had to set json to team_data = and then replace all blanks with : "", maybe better way... 
+        console.log(e["In Production"]); //ok so this is just a string, but we want a date
+
+
+    var data = team_data; //from the json
+
+    var sortedData = []
+    
+    data.forEach(function(task) { //do I need task here?
+        var dateFinished = moment(task["In Production"], "DD/MM/YYYY");
+        if (dateFinished) {
+            var month = dateFinished.month(), 
+                year = dateFinished.year(),
+                taskType = task["Type"]
+        
+		    if(sortedData[year] == undefined) sortedData[year] = new Object(); //?
+		    if(sortedData[year][month] == undefined) sortedData[year][month] = new Object();
+		    if(sortedData[year][month][taskType] == undefined) sortedData[year][month][taskType] = 0;
+		
+		    console.log(sortedData["2012"])
+		    sortedData[year][month][taskType] ++; 
+        }
+	});
+
+
+do one month's worth of data
+----------------------------
+    //make it a bit smaller
+    
+    var data = [50,50,25,50];
+    r.piechart(125, 125, 100, data, {colors:colours})
+    
+    
+    var r = Raphael("holder"), 
+    colours = ["#225533", "#44bbcc", "#88dddd", "#bbeeff"];
+    
+    var sortedData = sort_data(),
+        year = 2012,
+        month = 1, 
+        features = sortedData[year][month]["MMF"] || 0,
+        bugs = sortedData[year][month]["Bug"] || 0,
+        infrastructure = sortedData[year][month]["Infrastructure"] || 0,
+        maintenance = sortedData[year][month]["Maintenance"] || 0;
+    
+    var data = [features, bugs, infrastructure, maintenance];
+    
+    r.piechart(125, 125, 100, data, {colors:colours})
+    
+print out label
+---------------
+
+    r.text(x, y + labelOffset, moment.monthsShort[month] + " " + year)
+    
+
+    
+    
+    
+    
+
