@@ -71,6 +71,28 @@ print out label
     r.text(x, y + labelOffset, moment.monthsShort[month] + " " + year)
     
 
+do all months
+-------------
+-------------
+
+some will have no data
+------------------------
+       if (sortedData[year][month]) {
+       
+(could have sortedData do something about this?)
+
+offset
+------
+
+   pieSpacing = radius + 55,
+   
+   x += pieSpacing; <-- I don't really want this to happen for the first one, but... to do 
+   
+   
+pop down a row every six months
+--------------------------------
+    
+
     
     
     
