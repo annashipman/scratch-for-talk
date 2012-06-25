@@ -7,8 +7,8 @@ function projectPosition(d) {
     return projectX;
   }
 
-function numberOfFeatures(d) { return d.numberOfFeatures.length * 50; }
-function numberOfFixedBugs(d) { return d.fixedBugs.length * 50; }
+function numberOfFeatures(d) { return d.numberOfFeatures.length * 10; }
+function numberOfFixedBugs(d) { return d.fixedBugs.length * 10; }
 
 var month = 0;
 
@@ -59,10 +59,11 @@ function draw(month) {
   
 function redraw() {
    
-   month++;
-   draw(months[month])
-   //would put the transition in here
-
+   if (month < months.length -1) {
+    month++;
+    draw(months[month])
+    //would put the transition in here
+    }
 }
 
 setInterval(function() {
