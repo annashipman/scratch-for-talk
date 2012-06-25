@@ -51,12 +51,11 @@ function draw(month) {
         .append("circle")
         .style("fill",function(){ return "red";})
         .attr("cx", function(d) { return projectPosition(project) + 30}) 
-        .attr("cy", function(d) { return (height - (numberOfFeatures(project) + numberOfFixedBugs(project))) - project.unfixedBugs.indexOf(d) * 40 - 20} )
+        .attr("cy", function(d) { return (height - (numberOfFeatures(project) + numberOfFixedBugs(project) + 20) -  ( (1+project.unfixedBugs.indexOf(d)) * 40 )  )} )//have not got this right! Do some maths...
         .attr("r", 15); 
   }
   
 }
-  
 function redraw() {
    
    if (month < months.length -1) {
