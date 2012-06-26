@@ -153,7 +153,7 @@ class DataSorter
         "children" => [a, c, f, s]  
         }
 
-    File.open('json.js', 'w') do |file|
+    File.open('time_by_project.js', 'w') do |file|
         file.puts "var json ="  
         file.puts JSON.dump(parent)  
     end

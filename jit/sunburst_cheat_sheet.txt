@@ -91,16 +91,26 @@ Change styles when hovering and clicking nodes
           enable: true,
           type: 'Native',
           stylesClick: {
-            'color': '#33dddd'
+            'color': '#CCC'
           },
           stylesHover: {
-            'color': '#dd3333'
+            'color': '#999'
           }
         }, 
 
 
 
-TODO demo how to put all data into another jit chart
+To put into another chart
+------------------------
+
+
+have a look at the treemap using json
+
+copy the temporary data sorter into the treemap folder
+
+change path to data
+change angularWidth to area
+change html to time_by_project.js
 
 
 Notes extra to demo
