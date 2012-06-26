@@ -6,81 +6,59 @@ function projectPosition(d) {
     else if (d.project == "D") { projectX = 400; }
     return projectX;
   }
+  
+function numberOfFeatures(d) { return d.numberOfFeatures.length * 20; }
 
-function numberOfFeatures(d) { return d.numberOfFeatures.length * 10; }
-//function numberOfFixedBugs(d) { return d.fixedBugs.length * 10; }
-//function numberOfUnfixedBugs(d) { return d.unfixedBugs.length * 10 }
+var margin = {top: 20, right: 20, bottom: 20, left: 40},
+    width = 600 - margin.right,
+    height = 500 - margin.top - margin.bottom;
+    
+    
+var xScale = d3.scale.ordinal().domain(["", "a", "b", "c", "d"]).range([0, width/5, 2*(width/5), 3*(width/5), 4*(width/5), width]); //this can't be the right way to do this!
+
+var xAxis = d3.svg.axis().orient("bottom").scale(xScale).ticks(4, d3.format(",d"));
+
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
 
 var month = 0;
-          
-    var features = svg.append("g")
-        .selectAll("rect")
-        .data(months[month]) 
-        .enter()
-        .append("rect")
-        .style("fill", function() { return "#225533" } )
-        .attr("width", 60)
-        .attr("x", function(d) { return projectPosition(d) } )
-        
-        .attr("y", function(d) { return height - numberOfFeatures(d) } )
-        .attr("height", function(d) { return numberOfFeatures(d) });
-     
-  /*   svg.append("g")
-        .selectAll("rect")
-        .data(project.fixedBugs)
-        .enter()
-        .append("rect")
-        .style("fill",function(){ return "#44bbcc";})
-        .attr("x", function(d) { return projectPosition(project)}) 
-        .attr("y", function(d) { return (height - (numberOfFeatures(project) + numberOfFixedBugs(project) )) } )
-        .attr("width", 60)
-        .attr("height", function(d) { return numberOfFixedBugs(project) });
+
+var features = svg.append("g")
+    .selectAll("rect")
+    .data(months[month]) 
+    .enter()
+    .append("rect")
+    .style("fill", "green" )
+    .attr("width", 60)        
+    .attr("x", function(d) { return projectPosition(d) } )
     
-/*    svg.append("g")
-        .selectAll("bug")
-        .data(project.unfixedBugs)
-        .enter()
-        .append("circle")
-        .style("fill",function(){ return "red";})
-        .attr("cx", function(d) { return projectPosition(project) + 30}) 
-        .attr("cy", function(d) { var totalDepthOfBar = numberOfFeatures(project) + numberOfFixedBugs(project);
-                                  console.log(height - totalDepthOfBar);
-                                  var indexOfCurrentBug = 1 + project.unfixedBugs.indexOf(d);
-                                  console.log(indexOfCurrentBug);
-            return (height - totalDepthOfBar  -  ( (1+project.unfixedBugs.indexOf(d)) * 40 )  )} )//have not got this right! Do some maths...
-        .attr("r", 15); */
- //}
+    .attr("y", function(d) { return height - numberOfFeatures(d) } )
+    .attr("height", function(d) { return numberOfFeatures(d) });
+    
   
 function redraw() {
    
         svg.selectAll("rect") 
         .data(months[month])
+        
         .transition()
         .duration(1000)
         .attr("y", function(d) { return height - numberOfFeatures(d) } )
         .attr("height", function(d) { return numberOfFeatures(d) });
-    
-    
- /* 
-   svg.selectAll("rect")
-        .data(data)
- 6     .transition()
- 7       .duration(1000)
- 8       .attr("y", function(d) { return h - y(d.value) - .5; })
- 9       .attr("height", function(d) { return y(d.value); });
-10 */
-
-//    draw(months[month])
-    //would put the transition in here
-  //  }
-}
+    }
 
 setInterval(function() {
-  if (month < 1) {
+  if (month < months.length - 1) {
     month++;
     redraw();
   }
 }, 1500);
-
-
-
+        

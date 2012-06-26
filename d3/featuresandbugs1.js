@@ -9,39 +9,33 @@ function projectPosition(d) {
 
 function numberOfFeatures(d) { return d.numberOfFeatures.length * 10; }
 function numberOfFixedBugs(d) { return d.fixedBugs.length * 10; }
+function numberOfUnfixedBugs(d) { return d.unfixedBugs.length * 10 }
 
 var month = 0;
-
-    
-current_month = months[month];
-
-var len = current_month.length
-
-for (var index = 0; index < len; index++) {
-    var project = current_month[index]; //for each project
           
     var features = svg.append("g")
         .selectAll("rect")
-        .data(project.numberOfFeatures) 
+        .data(months[month]) 
         .enter()
         .append("rect")
         .style("fill", function() { return "#225533" } )
         .attr("width", 60)
+        .attr("x", function(d) { return projectPosition(d) } )
         
-        .attr("x", function(d) { return projectPosition(project) } )
-        .attr("y", function(d) { return height - numberOfFeatures(project) } )
-        .attr("height", function(d) { return numberOfFeatures(project) });
+        .attr("y", function(d) { return height - numberOfFeatures(d) } )
+        .attr("height", function(d) { return numberOfFeatures(d) });
      
-  /*   svg.append("g")
+   /*  svg.append("g")
         .selectAll("rect")
-        .data(project.fixedBugs)
+        .data(months[month])
         .enter()
         .append("rect")
         .style("fill",function(){ return "#44bbcc";})
-        .attr("x", function(d) { return projectPosition(project)}) 
-        .attr("y", function(d) { return (height - (numberOfFeatures(project) + numberOfFixedBugs(project) )) } )
+        .attr("x", function(d) { return projectPosition(d)}) 
         .attr("width", 60)
-        .attr("height", function(d) { return numberOfFixedBugs(project) });
+        
+        .attr("y", function(d) { return (height - (numberOfFeatures(d) + numberOfFixedBugs(d) )) } )
+        .attr("height", function(d) { return numberOfFixedBugs(d) });
     
 /*    svg.append("g")
         .selectAll("bug")
@@ -56,13 +50,18 @@ for (var index = 0; index < len; index++) {
                                   console.log(indexOfCurrentBug);
             return (height - totalDepthOfBar  -  ( (1+project.unfixedBugs.indexOf(d)) * 40 )  )} )//have not got this right! Do some maths...
         .attr("r", 15); */
-  }
+ //}
   
 function redraw() {
    
-   if (month < 1) {//months.length -1) {
-    //reset data
-    month++;
+        svg.selectAll("rect") 
+        .data(months[month])
+        .transition()
+        .duration(1000)
+        .attr("y", function(d) { return height - numberOfFeatures(d) } )
+        .attr("height", function(d) { return numberOfFeatures(d) });
+    
+    
  /* 
    svg.selectAll("rect")
         .data(data)
@@ -74,11 +73,14 @@ function redraw() {
 
 //    draw(months[month])
     //would put the transition in here
-    }
+  //  }
 }
 
 setInterval(function() {
-  redraw();
+  if (month < 1) {
+    month++;
+    redraw();
+  }
 }, 1500);
 
 

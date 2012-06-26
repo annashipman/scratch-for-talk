@@ -1,0 +1,138 @@
+Set the dimensions of the chart
+--------------------------------
+
+var margin = {top: 20, right: 20, bottom: 20, left: 40},
+    width = 600 - margin.right,
+    height = 500 - margin.top - margin.bottom;
+    
+    
+Add some axes
+-------------
+
+var xScale = d3.scale.ordinal().domain(["", "a", "b", "c", "d"]).range([0, width/5, 2*(width/5), 3*(width/5), 4*(width/5), width]); //this can't be the right way to do this!
+
+var xAxis = d3.svg.axis().orient("bottom").scale(xScale).ticks(4, d3.format(",d"));
+
+Create the chart object & add the x axis
+----------------------------------------
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+    
+add the first month's worth of bars
+-----------------------------------
+
+add group:
+   var features = svg.append("g")
+   
+select all rectangles (that don't yet exist):
+    .selectAll("rect")
+    .data(months[month]) <-- at this point add month[0]
+    
+then enter
+    .enter()
+    
+then append a rectangle
+  .append("rect")
+  
+style it:
+
+    .style("fill", "green" )
+    .attr("width", 60)
+    
+give it an x:
+
+    .attr("x", function(d) { return projectPosition(d) } )
+    
+and add the projectPosition function:
+
+function projectPosition(d) {
+    var projectX; 
+    if (d.project == "A") { projectX = 100; }
+    else if (d.project == "B") { projectX = 200; }
+    else if (d.project == "C") { projectX = 300; }
+    else if (d.project == "D") { projectX = 400; }
+    return projectX;
+  }
+  
+then leave space because this is what is going to change:
+y and height:
+
+ .attr("y", function(d) { return height - numberOfFeatures(d) } )
+ .attr("height", function(d) { return numberOfFeatures(d) });
+
+and add numberOfFeatures function:
+
+function numberOfFeatures(d) { return d.numberOfFeatures.length * 20; }
+
+OK, we want to transition
+-------------------------
+
+add a redraw function:
+
+function redraw() {
+
+}
+
+
+select rectangles
+-----------------
+svg.selectAll("rect") 
+
+pass the data again...
+-----------------------
+
+.data(months[month])
+
+
+start a transition and set some time
+------------------------------------
+        .transition()
+        .duration(1000)
+        
+then change what we want to change
+----------------------------------
+
+        .attr("y", function(d) { return height - numberOfFeatures(d) } )
+        .attr("height", function(d) { return numberOfFeatures(d) });
+
+finally, set the interval to call the redraw function
+-----------------------------------------------------
+
+setInterval(function() {
+  
+}, 1500);
+
+we don't want to carry on once the data has been exhausted
+----------------------------------------------------------
+
+setInterval(function() {
+  if (month < months.length - 1) {
+
+  }
+}, 1500);
+
+increment month and redraw
+---------------------------
+
+setInterval(function() {
+  if (month < months.length - 1) {
+    month++;
+    redraw();
+  }
+}, 1500);
+  
+  
+    
+    
+            
+    
+
+    

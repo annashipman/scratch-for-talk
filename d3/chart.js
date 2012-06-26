@@ -1,5 +1,5 @@
 // Chart dimensions.
-var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
+var margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = 600 - margin.right,
     height = 500 - margin.top - margin.bottom;
 
