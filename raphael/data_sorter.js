@@ -1,8 +1,8 @@
 function sort_data() {
 
-    var data = team_data; //from the json
+    var data = team_data; 
     
-    var sortedData = []
+    var sortedData = [];
     
     data.forEach(function(task) { 
         var dateFinished = moment(task["In Production"], "DD/MM/YYYY");
@@ -19,7 +19,6 @@ function sort_data() {
         }
 	});
 	
-	//I am not sure that sortedData is what I'd expect it to be at this point
 	return sortedData;
 }
 

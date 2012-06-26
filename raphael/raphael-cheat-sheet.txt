@@ -1,8 +1,14 @@
 Create the raphael holder
 -------------------------
-
+    
     var r = Raphael("holder", 600, 800);
-    r.piechart(125, 125, 100, [10,10,25,50])
+    
+Make a pie chart!
+-----------------
+   var data =  [10,10,25,50];
+    
+    var r = Raphael("holder", 600, 800);
+    r.piechart(125, 125, 100, data)
     
 Let's change the default colours
 ---------------------------------
@@ -14,14 +20,16 @@ Let's change the default colours
    r.piechart(125, 125, 100, [10,10,25,50], {colors:colours})
    
    
-Now to sort the data
+Now to sort the data - 
 --------------------
 
+I hacked the data.
 hmmm... had to set json to team_data = and then replace all blanks with : "", maybe better way... 
         console.log(e["In Production"]); //ok so this is just a string, but we want a date
 
 
-    var data = team_data; //from the json
+
+    remove data and introduce sorted datag
 
     var sortedData = []
     
@@ -40,39 +48,59 @@ hmmm... had to set json to team_data = and then replace all blanks with : "", ma
 		    sortedData[year][month][taskType] ++; 
         }
 	});
+	
+and add sort data
+----------------
+sortedData = sort_data();
 
 
 do one month's worth of data
-----------------------------
-    //make it a bit smaller
-    
-    var data = [50,50,25,50];
-    r.piechart(125, 125, 100, data, {colors:colours})
-    
-    
-    var r = Raphael("holder"), 
-    colours = ["#225533", "#44bbcc", "#88dddd", "#bbeeff"];
-    
-    var sortedData = sort_data(),
-        year = 2012,
+
+
+        sortedData = sort_data(),
+        year = 2012, //<--note year is 2012
         month = 1, 
         features = sortedData[year][month]["MMF"] || 0,
         bugs = sortedData[year][month]["Bug"] || 0,
         infrastructure = sortedData[year][month]["Infrastructure"] || 0,
         maintenance = sortedData[year][month]["Maintenance"] || 0;
-    
+        
+           
     var data = [features, bugs, infrastructure, maintenance];
     
     r.piechart(125, 125, 100, data, {colors:colours})
+
+make it a bit smaller   
+----------------------------
+   x = 50,
+   radius = 25,
+    
+   
+   r.piechart(x, x, radius, data, {colors:colours})
+
     
 print out label
 ---------------
+       x = 50,
+        y= 50,
+        radius = 25,
+        labelOffset = radius + 10,
 
     r.text(x, y + labelOffset, moment.monthsShort[month] + " " + year)
     
 
 do all months
 -------------
+
+add an offset:
+
+offset
+------
+
+   pieSpacing = radius + 55,
+   
+   
+
 -------------
 
 some will have no data
@@ -88,13 +116,31 @@ offset
    
    x += pieSpacing; <-- I don't really want this to happen for the first one, but... to do 
    
-   
+
+iterate
+
+-------
+
+     for (var month = 0; month <= 11; month++) {
+        var year = 2011;
+        
+       
+       then 
+       
+       x += pieSpacing;
+
+
 pop down a row every six months
 --------------------------------
+   add to vars
+   
     line = 1,
-    x = 50,
-    pieSpacing = radius + 55,
+    
+    and make y
+    
     y = pieSpacing * line,
+
+    then add
 
         x += pieSpacing;
         
@@ -122,8 +168,55 @@ ideally we want to know what they represent
 -------------------------------------------
 
 add hover in and hover out.
+----------------------------
 
-hmm. ok how about a stacked chart as well
+no idea how this works
+-----------------------
+            var pie = r.piechart(x, y, radius, data, {colors:colours}); 
+            pie.hover(hoverIn, hoverOut);
+
+
+function hoverIn() {
+	this.sector.stop();
+	this.flag = r.popup(this.mx, this.my, this.value.value).attr({
+		fill: "0-#c9de96-#8ab66b:44-#398235",
+		stroke: "#000"
+	});
+	this.sector.scale(1.5, 1.5, this.cx, this.cy);
+
+	if (this.label) {
+		this.label[0].stop();
+		this.label[0].attr({
+			r: 7.5
+		});
+		this.label[1].attr({
+			"font-weight": 800
+		});
+	}
+}
+
+function hoverOut() {
+	this.flag.animate({
+		opacity: 0
+	}, 300, function() {
+		this.remove();
+	});
+	this.sector.animate({
+		transform: 's1 1 ' + this.cx + ' ' + this.cy
+	}, 500, "bounce");
+	if (this.label) {
+		this.label[0].animate({
+			r: 5
+		}, 500, "bounce");
+		this.label[1].attr({
+			"font-weight": 400
+		});
+	}
+}
+      
+
+
+line graph
 -----------------------------------------
 
 make the canvas wider
@@ -131,24 +224,31 @@ make the canvas wider
 
     var r = Raphael("holder", 2000, 800), 
     
-include barchart
-----------------
 
-OK - could do this: 
-
-	//(x_start, y_start, x_width, from, to, steps, orientation, labels, type, dashsize)
-	Raphael.g.axis(825,230,310,null,null,4,2,["Today", "Yesterday", "Tomorrow", "Future"], "|", 0, r)
-	
-	//data2 = [[55, 20, 13, 32, 5, 1, 2, 10], [10, 2, 1, 5, 32, 13, 20, 55], [12, 20, 30]],
-	//r.barchart(825, 150, 300, 220, data2, {stacked: true});
     
-    
-But haven't figured out the axes. For now, a line graph:
-
-include linegraph
+linegraph
 -----------------
 
 <script type="text/javascript" src="lib/g.line.js"></script>
+
+add the arrays
+---------------
+
+var lineX = [], lineYFeatures = [], lineYBugs = [], lineYInfrastructure = [];
+
+push the data while we're here
+------------------------------
+
+
+            lineX.push(month);
+            lineYFeatures.push(features);
+            lineYBugs.push(bugs);
+            lineYInfrastructure.push(infrastructure);
+            
+then draw a line graph
+------------------------
+
+ r.linechart(700, 60, 300, 220, lineX, [lineYFeatures, lineYBugs, lineYInfrastructure], { nostroke: false, axis: "0 0 1 1", symbol: "rect", smooth: true, colors: colours })
     
     
     
