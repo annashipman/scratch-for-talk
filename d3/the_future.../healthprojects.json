@@ -1,0 +1,112 @@
+var months = [ [{
+    project: "A",
+    numberOfFeatures: [1],
+    fixedBugs: [1], 
+    unfixedBugs: [1] 
+ }, 
+{
+project: "B",
+numberOfFeatures: [1, 1],
+    fixedBugs: [2, 3], 
+    unfixedBugs: [2, 3]
+},
+{
+project: "C",
+numberOfFeatures: [1],
+    fixedBugs: [4, 5, 6], 
+    unfixedBugs: [4, 5, 6]
+},
+
+{
+project: "D",
+numberOfFeatures: [1],
+    fixedBugs: [7, 8, 9, 10], 
+    unfixedBugs: [7, 8, 9, 10]
+}], [
+
+{
+    project: "A",
+    numberOfFeatures: [1, 1],
+    fixedBugs: [1, 2, 3, 4, 5], 
+    unfixedBugs: [1] 
+ }, 
+{
+project: "B",
+numberOfFeatures: [1, 1],
+    fixedBugs: [2, 3, 4, 5, 6, 7], 
+    unfixedBugs: [2, 3]
+},
+{
+project: "C",
+numberOfFeatures: [1, 1, 1],
+    fixedBugs: [4, 5, 6], 
+    unfixedBugs: [4, 5, 6]
+},
+
+{
+project: "D",
+numberOfFeatures: [1, 1, 1, 1],
+    fixedBugs: [7, 8, 9, 10], 
+    unfixedBugs: [7, 8, 9, 10]
+}
+],
+
+[
+
+{
+    project: "A",
+    numberOfFeatures: [1, 1, 1],
+    fixedBugs: [1, 2, 3, 4, 5], 
+    unfixedBugs: [1, 1, 1, 1] 
+ }, 
+{
+project: "B",
+numberOfFeatures: [1, 1],
+    fixedBugs: [2, 3, 1, 1, 4, 5, 6, 7], 
+    unfixedBugs: [2, 3]
+},
+{
+project: "C",
+numberOfFeatures: [1, 1, 1, 1],
+    fixedBugs: [4, 5, 6, 1], 
+    unfixedBugs: [4, 5, 6, 1]
+},
+
+{
+project: "D",
+numberOfFeatures: [1, 1, 1, 1, 1, 1, 1, 1],
+    fixedBugs: [7, 8, 9, 10, 1, 1], 
+    unfixedBugs: [7, 8]
+}
+], 
+
+[
+
+{
+    project: "A",
+    numberOfFeatures: [1, 1, 1, 1, 1, 1, 1],
+    fixedBugs: [1, 2, 3, 4, 5, 1, 1, 1], 
+    unfixedBugs: [1, 1] 
+ }, 
+{
+project: "B",
+numberOfFeatures: [1, 1, 1, 1, 1, 1],
+    fixedBugs: [2, 3, 4, 5, 6, 7, 1, 1], 
+    unfixedBugs: [2, 3, 1, 1]
+},
+{
+project: "C",
+numberOfFeatures: [1, 1, 1,1],
+    fixedBugs: [4, 5, 6, 1], 
+    unfixedBugs: [4, 5, 6, 1]
+},
+
+{
+project: "D",
+numberOfFeatures: [1, 1, 1, 1],
+    fixedBugs: [7, 8, 9, 10], 
+    unfixedBugs: [7, 8, 9, 10]
+}
+]
+];
+
