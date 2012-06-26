@@ -8,16 +8,16 @@ class DataSorter
   class Product < Struct.new(:id, :name, :description, :color, :task_color, :tasks)
     def initialize(*args)
       super
-      self.products ||= []
+      self.tasks ||= []
     end
   end
 
-  # [ :id,  :name,, :description, :color, :task_color, :tasks) ]
+  # [ :id,  :name, :description, :color, :task_color, :tasks) ]
   PRODUCT_PROPERTIES = [
-    [ "A", "Product A", "A comment Project A", "#F5003D", "#00B8F5" ],
-    [ "C", "Product C", "A comment about Product C", "#3366FF", "#FF0033" ],
+    [ "A", "Product A", "A comment Project A", "#3366FF","#3366FF", "#00B8F5" ],
+    [ "C", "Product C", "A comment about Product C", "#F5003D", "#FF0033" ],
     [ "F", "Product F", "A comment about Product F", "#F5003D", "#88C200" ],
-    [ "S", "Product S", "A comment about Product S", "#27C200", "#FFFF3D" ]
+    [ "S", "Product S", "A comment about Product S", "#FFCC00", "#FFDE00" ]
   ]
 
   def initialize(csv_path)
@@ -27,11 +27,19 @@ class DataSorter
   def products_with_tasks_from_csv
     empty_products = PRODUCT_PROPERTIES.map { |a| Product.new(*a) }
     empty_products.tap { |products|
-      CSV.table(@csv_path).each do |row|
-        product = products.find { |p| p.id == row[:product] }
-        product.tasks << Task.new(row[:task], row[:start_date], row[:end_date], row[:time_spent_in_days])
-      end
-    }
+    
+     CSV.table(@csv_path).each do |row|
+        next if row.to_hash.values.none?
+        
+        product = products.find { |p| p.id == row[:feature_id][/./] } or next
+        task = Task.new(row[:feature_id], row[:development_started], row[:in_production])
+                
+            unless task.start_date.nil? || task.end_date.nil? 
+                task.time_spent_in_days = task.end_date.to_i - task.start_date.to_i 
+                product.tasks << task
+            end
+        end
+        }
   end
 
   def data_structure
@@ -40,9 +48,9 @@ class DataSorter
       "id" => "Parent",
       "name" => "All Products",
       "data" => { "$type" => "none" },
-      "children" => tasks.map { |product| {
-        "id" => task.id,
-        "name" => task.id,
+      "children" => products.map { |product| {
+        "id" => product.id,
+        "name" => product.id,
         "data" => {
           "$angularWidth" => 0,
           "description" => product.description,
@@ -65,7 +73,8 @@ class DataSorter
   end
 end
 
-data_structure =  DataSorter.new("../data/alldatahacked.csv").data_structure
-File.open("json.js", "w") do |io|
+data_sorter =  DataSorter.new("../data/alldata.csv")
+data_structure = data_sorter.data_structure
+File.open("time_by_project1.js", "w") do |io|
   io << "var json =" << JSON.dump(data_structure)
 end

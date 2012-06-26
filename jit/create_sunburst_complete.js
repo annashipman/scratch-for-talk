@@ -52,10 +52,10 @@ function init(){
           enable: true,
           type: 'Native',
           stylesClick: {
-            'color': '#33dddd'
+            'color': '#ccc'
           },
           stylesHover: {
-            'color': '#dd3333'
+            'color': '#999'
           }
         }, 
     });
