@@ -23,7 +23,7 @@ function draw(month) {
      var project = month[index];
           
      var features = svg.append("g")
-        .selectAll("project")
+        .selectAll("rect")
         .data(project.numberOfFeatures) 
         .enter()
         .append("rect")
@@ -33,8 +33,8 @@ function draw(month) {
         .attr("width", 60)
         .attr("height", function(d) { return numberOfFeatures(project) });
      
-     svg.append("g")
-        .selectAll("bug")
+  /*   svg.append("g")
+        .selectAll("rect")
         .data(project.fixedBugs)
         .enter()
         .append("rect")
@@ -44,22 +44,28 @@ function draw(month) {
         .attr("width", 60)
         .attr("height", function(d) { return numberOfFixedBugs(project) });
     
-    svg.append("g")
+/*    svg.append("g")
         .selectAll("bug")
         .data(project.unfixedBugs)
         .enter()
         .append("circle")
         .style("fill",function(){ return "red";})
         .attr("cx", function(d) { return projectPosition(project) + 30}) 
-        .attr("cy", function(d) { return (height - (numberOfFeatures(project) + numberOfFixedBugs(project) + 20) -  ( (1+project.unfixedBugs.indexOf(d)) * 40 )  )} )//have not got this right! Do some maths...
-        .attr("r", 15); 
+        .attr("cy", function(d) { var totalDepthOfBar = numberOfFeatures(project) + numberOfFixedBugs(project);
+                                  console.log(height - totalDepthOfBar);
+                                  var indexOfCurrentBug = 1 + project.unfixedBugs.indexOf(d);
+                                  console.log(indexOfCurrentBug);
+            return (height - totalDepthOfBar  -  ( (1+project.unfixedBugs.indexOf(d)) * 40 )  )} )//have not got this right! Do some maths...
+        .attr("r", 15); */
   }
   
 }
 function redraw() {
    
-   if (month < months.length -1) {
+   if (month < 1) {//months.length -1) {
     month++;
+    
+    //reset data
     draw(months[month])
     //would put the transition in here
     }
