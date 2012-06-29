@@ -1,30 +1,12 @@
 function init(){
-    
-    var sb = new $jit.Sunburst({
+
+   var sb = new $jit.Sunburst({
         injectInto: 'infovis',
-        Node: {
-            overridable: true
-        },
-        levelDistance: 90
+        levelDistance: 90,
+        Node: { overridable: true } 
     });
-    
+
     sb.loadJSON(json);
-    sb.refresh();
+    sb.refresh(); 
     
-    
-    
-    
-    
-
-
-
-    var sb = new $jit.Sunburst({
-        injectInto: 'infovis',
-        Node: {
-            overridable: true
-        },
-   });
-    
-    sb.loadJSON(json);
-    sb.refresh();
 }
