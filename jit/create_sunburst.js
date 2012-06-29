@@ -35,7 +35,17 @@ function init(){
             }
             tip.innerHTML = html;
           }
-        }
+        },
+        NodeStyles: {
+          enable: true,
+          type: 'Native',
+          stylesClick: {
+            'color': '#CCC'
+          },
+          stylesHover: {
+            'color': '#999'
+          }
+        } 
     });
 
     sb.loadJSON(json);
