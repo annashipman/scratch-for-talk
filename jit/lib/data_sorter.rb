@@ -22,7 +22,7 @@ class DataSorter
     end
   end
 
-  class Product < Struct.new(:id, :name, :description, :color, :task_color, :tasks)
+  class Project < Struct.new(:id, :name, :description, :color, :task_color, :tasks)
     def initialize(*args)
       super
       self.tasks ||= []
@@ -35,21 +35,26 @@ class DataSorter
     @date_range = options[:date_range]
   end
 
-  def empty_products
+  def empty_projects
     [
       #           id   name         description                  color      task color
-      Product.new("A", "Project A", "A comment Project A",       "#3366FF", "#00B8F5"),
-      Product.new("C", "Project C", "A comment about Product C", "#F5003D", "#FF0033"),
-      Product.new("F", "Project F", "A comment about Product F", "#F5003D", "#88C200"),
-      Product.new("S", "Project S", "A comment about Product S", "#FFCC00", "#FFDE00")
+      Project.new("A", "Project A", "A comment Project A",       "#6A8CE0", "#7CB2E0"),
+      Project.new("C", "Project C", "A comment about Project C", "#E4A12D", "#F2D433"),
+      Project.new("F", "Project F", "A comment about Project F", "#D96920", "#A5350E"),
+      Project.new("S", "Project S", "A comment about Project S", "#3E56A1", "#36305D")
     ]
   end
 
   def products_with_tasks_from_csv
-    products = empty_products
+    products = empty_projects
+
+    #Read in the CSV row by row 
     CSV.table(@csv_path).each do |row|
+      
+      #ignore blank rows
       next if row.to_hash.values.none?
       
+      #find the 
       product = products.find { |p| p.name == row[:application_name] } or next
       task = Task.new(row[:feature_id], row[:development_started], row[:in_production])
       product.tasks << task if task.valid? && task.in_range?(@date_range)
@@ -89,7 +94,7 @@ class DataSorter
     products = products_with_tasks_from_csv
     {
       "id" => "Parent",
-      "name" => "All Products",
+      "name" => "All Projects",
       "data" => { "$type" => "none" },
       "children" => products.map { |product| product_data_structure(product) }
     }
