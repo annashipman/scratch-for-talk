@@ -65,5 +65,18 @@ function projectPosition(d) {
   
 function numberOfFeatures(d) { return d.numberOfFeatures.length * 20; }
 
-  
+function redraw() {
+   
+        svg.selectAll("rect") 
+        .data(months[month])
+        .attr("y", function(d) { return height - numberOfFeatures(d) } )
+        .attr("height", function(d) { return numberOfFeatures(d) });
+    }
+
+setInterval(function() {
+  if (month < months.length - 1) {
+    month++;
+    redraw();
+  }
+}, 1500);  
 
