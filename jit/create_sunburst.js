@@ -22,7 +22,15 @@ function init(){
             if("description" in data) {
               html += data.description;
             }
+
             $jit.id('inner-details').innerHTML = html;
+
+            sb.tips.hide();
+           
+            sb.rotate(node, 'animate' , {
+              duration: 1000,
+              transition: $jit.Trans.Quart.easeInOut
+            });
           }
         },
         Tips: {
