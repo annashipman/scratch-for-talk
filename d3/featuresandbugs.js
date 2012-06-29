@@ -53,7 +53,7 @@ var axis = svg.append('g')
 
 // add the lables along the bottom
 axis.selectAll('text')
-  .data(projects).enter()
+    .data(projects).enter()
     .append('text')
       .text(function(d){ return d; })
       .attr('dx', function(d){ return xScale(d) + (xScale.rangeBand() / 2); })
@@ -77,13 +77,13 @@ axis.append("text")
   .attr("class", "x label")
   .attr("text-anchor", "end")
   .attr("x", width)
-  .attr("y", height - 6)
+  .attr("y", height + 15)
   .text("projects");
 
 axis.append("text")
   .attr("class", "y label")
   .attr("text-anchor", "end")
-  .attr("y", 6)
+  .attr("y", - 18)
   .attr("dy", ".75em")
   .attr("transform", "rotate(-90)")
   .text("number of completed features");
