@@ -69,6 +69,8 @@ function redraw() {
    
         svg.selectAll("rect") 
         .data(months[month])
+        .transition()
+        .duration(1000)
         .attr("y", function(d) { return height - numberOfFeatures(d) } )
         .attr("height", function(d) { return numberOfFeatures(d) });
     }
