@@ -13,21 +13,21 @@ function init(){
           enable: true,
           onClick: function(node) {
             if(!node) return;
-            var html = "<h4>" + node.name + "</h4>", data = node.data;
+            var caption = node.name + "\n", data = node.data;
             if("type" in data) {
-              html += "<b>Type: </b> " + data.type;
+              caption += "Type: " + data.type+"\n";
             }
             if("startDate" in data) {
-              html += "<br /><br /><b>Work started on: </b> " + data.startDate;
+              caption += "Work started on: " + data.startDate + "\n";
             }
             if("endDate" in data) {
-              html += "<br /><br /><b>In production on: </b><br />" + data.endDate;
+              caption += "In production on: " + data.endDate+"\n";
             }
             if("description" in data) {
-              html += data.description;
+              caption += data.description;
             }
             
-            $jit.id('inner-details').innerHTML = html;  
+            $jit.id('inner-details').innerHTML = caption;  
             
             sb.tips.hide();
            
