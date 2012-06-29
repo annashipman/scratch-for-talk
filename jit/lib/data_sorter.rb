@@ -62,7 +62,7 @@ class DataSorter
       "id" => task.id,
       "name" => task.id,
       "data" => {
-        "$angularWidth" => task.time_spent_in_days,
+        "$area" => task.time_spent_in_days,
         "startDate" => task.start_date,
         "endDate" => task.end_date,
         "timeTaken" => task.time_spent_in_days,
@@ -77,7 +77,7 @@ class DataSorter
       "id" => product.id,
       "name" => product.name,
       "data" => {
-        "$angularWidth" => 0,
+        "$area" => 0,
         "description" => product.description,
         "$color" => product.color,
       },
@@ -88,9 +88,9 @@ class DataSorter
   def data_structure
     products = products_with_tasks_from_csv
     {
-      "id" => "Parent",
+      "id" => "root",
       "name" => "All Products",
-      "data" => { "$type" => "none" },
+      "data" => {  },
       "children" => products.map { |product| product_data_structure(product) }
     }
   end
