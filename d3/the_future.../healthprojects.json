@@ -1,7 +1,7 @@
 var months = [ [{
     project: "A",
-    numberOfFeatures: [1],
-    fixedBugs: [1], 
+    numberOfFeatures: [A-125],
+    fixedBugs: [A-127], 
     unfixedBugs: [1] 
  }, 
 {
