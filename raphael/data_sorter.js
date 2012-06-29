@@ -9,7 +9,7 @@ function sort_data() {
         if (dateFinished) {
             var month = dateFinished.month() 
                 year = dateFinished.year(),
-                taskType = task["Type"]
+                taskType = task["Type"];
         
 		    if(sortedData[year] == undefined) sortedData[year] = new Object(); 
 		    if(sortedData[year][month] == undefined) sortedData[year][month] = new Object();

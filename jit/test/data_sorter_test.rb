@@ -4,11 +4,11 @@ require_relative '../lib/data_sorter'
 
 class DataSorterTest < MiniTest::Unit::TestCase
 
-	def test_products_with_tasks_from_csv_groups_tasks_by_product
+	def test_projects_with_tasks_from_csv_groups_tasks_by_product
     sorter = DataSorter.new(File.dirname(__FILE__) + "/fixtures/sample.csv")
 
-    products_with_tasks = sorter.products_with_tasks_from_csv
-    product_a = products_with_tasks.select { |p| p.id == "A" }.first
+    projects_with_tasks = sorter.projects_with_tasks_from_csv
+    product_a = projects_with_tasks.select { |p| p.id == "A" }.first
     assert_equal 1, product_a.tasks.size
     first_task = product_a.tasks.first
     assert_equal "A-129", first_task.id

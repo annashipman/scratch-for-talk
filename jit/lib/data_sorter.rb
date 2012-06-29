@@ -45,8 +45,8 @@ class DataSorter
     ]
   end
 
-  def products_with_tasks_from_csv
-    products = empty_projects
+  def projects_with_tasks_from_csv
+    projects = empty_projects
 
     #Read in the CSV row by row 
     CSV.table(@csv_path).each do |row|
@@ -54,15 +54,19 @@ class DataSorter
       #ignore blank rows
       next if row.to_hash.values.none?
       
-      #find the 
-      product = products.find { |p| p.name == row[:application_name] } or next
+      #find the project to which the task applies - ignore this row if it's not one of the ones we're looking at
+      project = projects.find { |p| p.name == row[:application_name] } or next
+
+      #add the date we are interested in to our task object
       task = Task.new(row[:feature_id], row[:development_started], row[:in_production])
-      product.tasks << task if task.valid? && task.in_range?(@date_range)
+
+      #add it to that project's tasks if it is valid and in our range
+      project.tasks << task if task.valid? && task.in_range?(@date_range)
     end
-    products
+    projects
   end
 
-  def task_data_structure(product, task)
+  def task_data_structure(project, task)
     {
       "id" => task.id,
       "name" => task.id,
@@ -71,32 +75,32 @@ class DataSorter
         "startDate" => task.start_date,
         "endDate" => task.end_date,
         "timeTaken" => task.time_spent_in_days,
-        "$color" => product.task_color
+        "$color" => project.task_color
       },
       "children" => []
     }
   end
 
-  def product_data_structure(product)
+  def project_data_structure(project)
     {
-      "id" => product.id,
-      "name" => product.name,
+      "id" => project.id,
+      "name" => project.name,
       "data" => {
         "$angularWidth" => 0,
-        "description" => product.description,
-        "$color" => product.color,
+        "description" => project.description,
+        "$color" => project.color,
       },
-      "children" => product.tasks.map { |task| task_data_structure(product, task) }
+      "children" => project.tasks.map { |task| task_data_structure(project, task) }
     }
   end
 
   def data_structure
-    products = products_with_tasks_from_csv
+    projects = projects_with_tasks_from_csv
     {
       "id" => "Parent",
       "name" => "All Projects",
       "data" => { "$type" => "none" },
-      "children" => products.map { |product| product_data_structure(product) }
+      "children" => projects.map { |project| project_data_structure(project) }
     }
   end
 end
