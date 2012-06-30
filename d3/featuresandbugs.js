@@ -40,8 +40,8 @@ var fixedBugs = svg.selectAll(".fixed-bug")
         .style("fill", colorScale(3) )
         .attr("class", "fixed-bug")
     
-        .attr("y", function(d) { return height - (yScale(d.numberOfFeatures.length) + 50) } )//TODO - make it on top of the other one
-        .attr("height", function(d) { return yScale(d.numberOfFeatures.length); })
+        .attr("y", function(d) { return height - ( yScale(d.numberOfFeatures.length) + yScale(d.fixedBugs.length) ) } )//TODO - make it on top of the other one
+        .attr("height", function(d) { return yScale(d.fixedBugs.length); })
 
 
 function redraw() {
@@ -56,8 +56,8 @@ function redraw() {
     .data(months[month])
     .transition()
       .duration(1000)
-    .attr("y", function(d) { return height - (yScale(d.numberOfFeatures.length) + 50 ); } ) //TODO and here.
-    .attr("height", function(d) { return yScale(d.numberOfFeatures.length); });
+    .attr("y", function(d) { return height - (yScale(d.numberOfFeatures.length) + yScale(d.fixedBugs.length) ); } ) //TODO and here.
+    .attr("height", function(d) { return yScale(d.fixedBugs.length); });
 
 }
 

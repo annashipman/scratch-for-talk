@@ -1,0 +1,89 @@
+var months = [
+[{ 
+    project: "A",
+    numberOfFeatures: [1],
+ }, 
+ { 
+    project: "B",
+    numberOfFeatures: [1],
+    },
+{ 
+    project: "C",
+    numberOfFeatures: [1],
+    },
+    {
+    project: "D",
+    numberOfFeatures: [1, 2],
+    }], 
+   
+[{ 
+    project: "A",
+    numberOfFeatures: [1, 2],
+ }, 
+ { 
+    project: "B",
+    numberOfFeatures: [1, 2],
+    },
+{ 
+    project: "C",
+    numberOfFeatures: [1, 2, 3],
+    },
+    {
+    project: "D",
+    numberOfFeatures: [1, 2],
+    }],
+    
+[{ 
+    project: "A",
+    numberOfFeatures: [1, 2, 3, 4],
+ }, 
+ { 
+    project: "B",
+    numberOfFeatures: [1, 2, 3, 4],
+    },
+{ 
+    project: "C",
+    numberOfFeatures: [1, 2, 3, 4, 5, 6],
+    },
+    {
+    project: "D",
+    numberOfFeatures: [1, 2],
+    }],
+    
+[{ 
+    project: "A",
+    numberOfFeatures: [1, 2, 3, 4],
+ }, 
+ { 
+    project: "B",
+    numberOfFeatures: [1, 2, 3, 4, 5, 6, 7]
+    },
+{ 
+    project: "C",
+    numberOfFeatures: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    },
+    {
+    project: "D",
+    numberOfFeatures: [1, 2, 3],
+    }],
+    
+[{ 
+    project: "A",
+    numberOfFeatures: [1, 2, 3, 4, 5, 6, 7, 8],
+ }, 
+ { 
+    project: "B",
+    numberOfFeatures: [1, 2, 3, 4, 5, 6, 7,8, 9, 10]
+    },
+{ 
+    project: "C",
+    numberOfFeatures: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    },
+    {
+    project: "D",
+    numberOfFeatures: [1, 2, 3, 4, 5],
+    }]
+
+    
+];
+    
