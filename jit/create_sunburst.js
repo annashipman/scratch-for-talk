@@ -48,10 +48,10 @@ function init(){
           enable: true,
           type: 'Native',
           stylesClick: {
-            'color': '#CCC'
+            'color': "#36305D"
           },
           stylesHover: {
-            'color': '#999'
+            'color': "#3E56A1"
           }
         } 
     });

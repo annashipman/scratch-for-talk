@@ -38,10 +38,10 @@ class DataSorter
   def empty_projects
     [
       #           id   name         description                  color      task color
-      Project.new("A", "Project A", "A comment Project A",       "#6A8CE0", "#7CB2E0"),
-      Project.new("C", "Project C", "A comment about Project C", "#E4A12D", "#F2D433"),
-      Project.new("F", "Project F", "A comment about Project F", "#D96920", "#A5350E"),
-      Project.new("S", "Project S", "A comment about Project S", "#3E56A1", "#36305D")
+      Project.new("A", "Project A", "A comment about Project A", "#6A8CE0", "#7CB2E0"),
+      Project.new("C", "Project C", "A comment about Project C", "#E34A33", "#FC8D59"),
+      Project.new("F", "Project F", "A comment about Project F", "#78C679", "#C2E699"),
+      Project.new("S", "Project S", "A comment about Project S", "#E4A12D", "#F2D433")
     ]
   end
 
