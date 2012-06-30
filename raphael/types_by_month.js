@@ -50,7 +50,12 @@ function init() {
 		colors: colours}
 	pie = r.piechart(x, y, radius, [25, 25, 25, 25], legendOptions);
 	
-	 r.linechart(700, 60, 300, 220, lineX, [lineYFeatures, lineYBugs, lineYInfrastructure], { nostroke: false, axis: "0 0 1 1", symbol: "rect", smooth: true, colors: colours })
+	 r.linechart(700, 60, 300, 220, lineX, 
+	 	[lineYFeatures, lineYBugs], { 
+	 	axis: "0 0 1 1", //TRBL
+	 	axisxstep: 11, //how often we want to number the x axis
+	 	smooth: true, 
+	 	colors: colours })
 
 function hoverIn() {
 	this.sector.stop();
