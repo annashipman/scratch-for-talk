@@ -86,7 +86,6 @@ class DataSorter
       "id" => project.id,
       "name" => project.name,
       "data" => {
-        "$angularWidth" => 0,
         "description" => project.description,
         "$color" => project.color,
       },
