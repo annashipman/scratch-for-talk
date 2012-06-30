@@ -29,8 +29,8 @@ var features = svg.selectAll(".feature")
         .style("fill", colorScale(1) )
         .attr("class", "feature")
     
-        .attr("y", function(d) { return height - yScale(d.numberOfFeatures.length); } )
-        .attr("height", function(d) { return yScale(d.numberOfFeatures.length); })
+        .attr("y", function(d) { return height - yScale(d.numberOfFeatures); } )
+        .attr("height", function(d) { return yScale(d.numberOfFeatures); })
 
 var fixedBugs = svg.selectAll(".fixed-bug")
     .data(months[month]).enter()
@@ -40,8 +40,8 @@ var fixedBugs = svg.selectAll(".fixed-bug")
         .style("fill", colorScale(2) )
         .attr("class", "fixed-bug")
     
-        .attr("y", function(d) { return height - ( yScale(d.numberOfFeatures.length) + yScale(d.fixedBugs.length) ) } )//TODO - make it on top of the other one
-        .attr("height", function(d) { return yScale(d.fixedBugs.length); })    
+        .attr("y", function(d) { return height - ( yScale(d.numberOfFeatures) + yScale(d.fixedBugs) ) } )//TODO - make it on top of the other one
+        .attr("height", function(d) { return yScale(d.fixedBugs); })    
 
 var unfixedBugs = svg.selectAll(".unfixed-bug")
     .data(months[month]).enter() 
@@ -50,30 +50,30 @@ var unfixedBugs = svg.selectAll(".unfixed-bug")
         .attr("class", "unfixed-bug")
         .attr("cx", function(d) { return xScale(d.project) + 70;  } ) 
         
-        .attr("cy", function(d) { return height - ( yScale(d.numberOfFeatures.length) + yScale(d.fixedBugs.length) + 40 ); } )
-        .attr("r", function(d) { return d.unfixedBugs.length * 10; } ) 
+        .attr("cy", function(d) { return height - ( yScale(d.numberOfFeatures) + yScale(d.fixedBugs) + 40 ); } )
+        .attr("r", function(d) { return d.unfixedBugs * 10; } ) 
 
 function redraw() {
   svg.selectAll(".feature")
     .data(months[month])
     .transition()
       .duration(1000)
-    .attr("y", function(d) { return height - yScale(d.numberOfFeatures.length); } )
-    .attr("height", function(d) { return yScale(d.numberOfFeatures.length); });
+    .attr("y", function(d) { return height - yScale(d.numberOfFeatures); } )
+    .attr("height", function(d) { return yScale(d.numberOfFeatures); });
 
   svg.selectAll(".fixed-bug")
     .data(months[month])
     .transition()
       .duration(1000)
-    .attr("y", function(d) { return height - (yScale(d.numberOfFeatures.length) + yScale(d.fixedBugs.length) ); } ) //TODO and here.
-    .attr("height", function(d) { return yScale(d.fixedBugs.length); });
+    .attr("y", function(d) { return height - (yScale(d.numberOfFeatures) + yScale(d.fixedBugs) ); } ) //TODO and here.
+    .attr("height", function(d) { return yScale(d.fixedBugs); });
 
   svg.selectAll(".unfixed-bug")
     .data(months[month])
     .transition()
       .duration(1000)
-    .attr("cy", function(d) { return height - ( yScale(d.numberOfFeatures.length) + yScale(d.fixedBugs.length) + 40 ); } )
-    .attr("r", function(d) { return d.unfixedBugs.length * 10; } ) 
+    .attr("cy", function(d) { return height - ( yScale(d.numberOfFeatures) + yScale(d.fixedBugs) + 40 ); } )
+    .attr("r", function(d) { return d.unfixedBugs * 10; } ) 
 }
 
 setInterval(function() {
