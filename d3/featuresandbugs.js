@@ -43,17 +43,15 @@ var fixedBugs = svg.selectAll(".fixed-bug")
         .attr("y", function(d) { return height - ( yScale(d.numberOfFeatures.length) + yScale(d.fixedBugs.length) ) } )//TODO - make it on top of the other one
         .attr("height", function(d) { return yScale(d.fixedBugs.length); })    
 
-/* var unfixedBugs = svg.selectAll(".unfixed-bug")
-     .data(months[month]).enter() //what I really want here is
-    
-      what I've got is an array with four objects, each containing some properties, one of which is the unfixedBugs array. I
-      //append circle do radius thing
+var unfixedBugs = svg.selectAll(".unfixed-bug")
+    .data(months[month]).enter() 
       .append("circle")
         .style("fill", "red")
-        .attr("cx", function(d) { return xScale(d.project) + 40;  } ) 
-        .attr("cy", function(d) { return height - yScale(d); } )
-        .attr("r", 10); 
-*/
+        .attr("class", "unfixed-bug")
+        .attr("cx", function(d) { return xScale(d.project) + 70;  } ) 
+        
+        .attr("cy", function(d) { return height - ( yScale(d.numberOfFeatures.length) + yScale(d.fixedBugs.length) + 40 ); } )
+        .attr("r", function(d) { return d.unfixedBugs.length * 10; } ) 
 
 function redraw() {
   svg.selectAll(".feature")
@@ -70,6 +68,12 @@ function redraw() {
     .attr("y", function(d) { return height - (yScale(d.numberOfFeatures.length) + yScale(d.fixedBugs.length) ); } ) //TODO and here.
     .attr("height", function(d) { return yScale(d.fixedBugs.length); });
 
+  svg.selectAll(".unfixed-bug")
+    .data(months[month])
+    .transition()
+      .duration(1000)
+    .attr("cy", function(d) { return height - ( yScale(d.numberOfFeatures.length) + yScale(d.fixedBugs.length) + 40 ); } )
+    .attr("r", function(d) { return d.unfixedBugs.length * 10; } ) 
 }
 
 setInterval(function() {
