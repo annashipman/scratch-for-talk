@@ -2,7 +2,7 @@ var margin = {top: 20, right: 20, bottom: 20, left: 40},
     width = 600 - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-var projects = ["A", "B", "C", "D"];
+var projects = ["A", "C", "F", "S"];
 
 var colorScale = d3.scale.category10();
 

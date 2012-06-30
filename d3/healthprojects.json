@@ -6,20 +6,20 @@ var months = [
     unfixedBugs: [1] 
  }, 
 {
-project: "B",
+project: "C",
 numberOfFeatures: [1, 2],
     fixedBugs: [2, 3], 
     unfixedBugs: [2, 3]
 },
 {
-project: "C",
+project: "F",
 numberOfFeatures: [1],
     fixedBugs: [4, 5, 6], 
     unfixedBugs: [4, 5, 6]
 },
 
 {
-project: "D",
+project: "S",
 numberOfFeatures: [1],
     fixedBugs: [7, 8, 9, 10], 
     unfixedBugs: [7, 8, 9, 10]
@@ -32,20 +32,20 @@ numberOfFeatures: [1],
     unfixedBugs: [1, 2] 
  }, 
 {
-project: "B",
+project: "C",
 numberOfFeatures: [1, 2],
     fixedBugs: [2, 3, 4, 5, 6, 7], 
     unfixedBugs: [2, 3, 4]
 },
 {
-project: "C",
+project: "F",
 numberOfFeatures: [1, 2, 3],
     fixedBugs: [4, 5, 6], 
     unfixedBugs: [4, 5, 6]
 },
 
 {
-project: "D",
+project: "S",
 numberOfFeatures: [1, 2, 3, 4],
     fixedBugs: [7, 8, 9, 10], 
     unfixedBugs: [7, 8, 9, 10]
@@ -63,20 +63,20 @@ numberOfFeatures: [1, 2, 3, 4],
     unfixedBugs: [1, 1, 1, 1] 
  }, 
 {
-project: "B",
+project: "C",
 numberOfFeatures: [1, 1],
     fixedBugs: [2, 3, 1, 1, 4, 5, 6, 7], 
     unfixedBugs: [2, 3]
 },
 {
-project: "C",
+project: "F",
 numberOfFeatures: [1, 1, 1, 1],
     fixedBugs: [4, 5, 6, 1], 
     unfixedBugs: [4, 5, 6, 1]
 },
 
 {
-project: "D",
+project: "S",
 numberOfFeatures: [1, 1, 1, 1, 1, 1, 1, 1],
     fixedBugs: [7, 8, 9, 10, 1, 1], 
     unfixedBugs: [7, 8]
@@ -92,20 +92,20 @@ numberOfFeatures: [1, 1, 1, 1, 1, 1, 1, 1],
     unfixedBugs: [1, 1] 
  }, 
 {
-project: "B",
+project: "C",
 numberOfFeatures: [1, 1, 1, 1, 1, 1],
     fixedBugs: [2, 3, 4, 5, 6, 7, 1, 1], 
     unfixedBugs: [2, 3, 1, 1]
 },
 {
-project: "C",
+project: "F",
 numberOfFeatures: [1, 1, 1,1],
     fixedBugs: [4, 5, 6, 1], 
     unfixedBugs: [4, 5, 6, 1]
 },
 
 {
-project: "D",
+project: "S",
 numberOfFeatures: [1, 1, 1, 1],
     fixedBugs: [7, 8, 9, 10], 
     unfixedBugs: [7, 8, 9, 10]
