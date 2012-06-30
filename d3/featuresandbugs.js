@@ -33,16 +33,27 @@ var features = svg.selectAll(".feature")
         .attr("height", function(d) { return yScale(d.numberOfFeatures.length); })
 
 var fixedBugs = svg.selectAll(".fixed-bug")
- .data(months[month]).enter()
+    .data(months[month]).enter()
       .append("rect")
         .attr("x", function(d) { return xScale(d.project) + 40 } ) 
         .attr("width", xScale.rangeBand() - 80) 
-        .style("fill", colorScale(3) )
+        .style("fill", colorScale(2) )
         .attr("class", "fixed-bug")
     
         .attr("y", function(d) { return height - ( yScale(d.numberOfFeatures.length) + yScale(d.fixedBugs.length) ) } )//TODO - make it on top of the other one
-        .attr("height", function(d) { return yScale(d.fixedBugs.length); })
+        .attr("height", function(d) { return yScale(d.fixedBugs.length); })    
 
+/* var unfixedBugs = svg.selectAll(".unfixed-bug")
+     .data(months[month]).enter() //what I really want here is
+    
+      what I've got is an array with four objects, each containing some properties, one of which is the unfixedBugs array. I
+      //append circle do radius thing
+      .append("circle")
+        .style("fill", "red")
+        .attr("cx", function(d) { return xScale(d.project) + 40;  } ) 
+        .attr("cy", function(d) { return height - yScale(d); } )
+        .attr("r", 10); 
+*/
 
 function redraw() {
   svg.selectAll(".feature")
