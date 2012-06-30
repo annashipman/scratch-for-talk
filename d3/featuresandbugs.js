@@ -21,23 +21,44 @@ var svg = d3.select("#chart").append("svg")
 
 var month = 0;
 
-var features = svg.selectAll("rect")
+var features = svg.selectAll(".feature")
     .data(months[month]).enter()
       .append("rect")
         .attr("x", function(d) { return xScale(d.project) + 40 } ) 
         .attr("width", xScale.rangeBand() - 80) //hard-coding is for gap
         .style("fill", colorScale(1) )
+        .attr("class", "feature")
     
         .attr("y", function(d) { return height - yScale(d.numberOfFeatures.length); } )
-        .attr("height", function(d) { return yScale(d.numberOfFeatures.length); });
+        .attr("height", function(d) { return yScale(d.numberOfFeatures.length); })
+
+var fixedBugs = svg.selectAll(".fixed-bug")
+ .data(months[month]).enter()
+      .append("rect")
+        .attr("x", function(d) { return xScale(d.project) + 40 } ) 
+        .attr("width", xScale.rangeBand() - 80) 
+        .style("fill", colorScale(3) )
+        .attr("class", "fixed-bug")
+    
+        .attr("y", function(d) { return height - (yScale(d.numberOfFeatures.length) + 50) } )//TODO - make it on top of the other one
+        .attr("height", function(d) { return yScale(d.numberOfFeatures.length); })
+
 
 function redraw() {
-  svg.selectAll("rect")
+  svg.selectAll(".feature")
     .data(months[month])
     .transition()
       .duration(1000)
     .attr("y", function(d) { return height - yScale(d.numberOfFeatures.length); } )
     .attr("height", function(d) { return yScale(d.numberOfFeatures.length); });
+
+  svg.selectAll(".fixed-bug")
+    .data(months[month])
+    .transition()
+      .duration(1000)
+    .attr("y", function(d) { return height - (yScale(d.numberOfFeatures.length) + 50 ); } ) //TODO and here.
+    .attr("height", function(d) { return yScale(d.numberOfFeatures.length); });
+
 }
 
 setInterval(function() {
