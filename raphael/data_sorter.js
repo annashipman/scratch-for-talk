@@ -14,15 +14,23 @@ function sort_data() {
         if (dateFinished) {
             var month = dateFinished.month() 
                 year = dateFinished.year();
-            var monthString = moment.monthsShort[month] + " " + year;
-
-            if(sortedData.indexOf(monthString) === -1) {
-                sortedData.push(monthString);
+            
+            if(year === 2011 && sortedData.indexOf(month) === -1) {
+                var monthString = moment.monthsShort[month] + " " + year;
+                var monthData = {
+                    month: month,
+                    monthString: monthString,
+                    features: 0,
+                    bugs: 0
+                }
+                sortedData.push(monthData);
+            } else {
+                //increment the tasks
             }
         }    
     });
 
-    console.log(sortedData)
+    console.log(sortedData.length)
 
     //go through the 
 
