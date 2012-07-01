@@ -5,32 +5,47 @@ function sort_data() {
     var sortedData = [];
 
     console.log("hiya anna!");
+    var index = {};
+
 
     //get all the dates from the data
     data.forEach(function(task) { 
         var dateFinished = moment(task["In Production"], "DD/MM/YYYY");
         
-        
         if (dateFinished) {
             var month = dateFinished.month() 
-                year = dateFinished.year();
-            
-            if(year === 2011 && sortedData.indexOf(month) === -1) {
+                year = dateFinished.year(),
+                date_string = month+"-"+year;
+                console.log(typeof(month) + " " + typeof(year));
+
+            if(index[date_string] !== undefined) {
+                var data = sortedData[index[date_string]];
+                // set data. features ./ bugs right...
+            } else {
                 var monthString = moment.monthsShort[month] + " " + year;
                 var monthData = {
                     month: month,
+                    year: year,
                     monthString: monthString,
                     features: 0,
-                    bugs: 0
+                    bugs: 0,
+                    toString: function() {return this.monthString;}
                 }
-                sortedData.push(monthData);
-            } else {
-                //increment the tasks
+                index[date_string] = sortedData.push(monthData); 
             }
         }    
     });
 
-    console.log(sortedData.length)
+    console.log("before sort", sortedData.join(" , "));
+    var anotherArray = sortedData.sort(function(a, b) {
+        console.log("testing ", a.toString(), " against ", b.toString(), " returning", a.year > b.year);
+
+        return a.year > b.year;}
+    );
+
+    console.log(sortedData.join(" , "));
+    console.log(sortedData);
+
 
     //go through the 
 
