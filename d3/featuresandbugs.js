@@ -22,7 +22,8 @@ var svg = d3.select("#chart").append("svg")
 var month = 0;
 
 var features = svg.selectAll(".feature")
-    .data(months[month]).enter()
+    .data(months[month])
+    .enter()
       .append("rect")
         .attr("x", function(d) { return xScale(d.project) + 40 } ) 
         .attr("width", xScale.rangeBand() - 80) //hard-coding is for gap
@@ -30,10 +31,11 @@ var features = svg.selectAll(".feature")
         .attr("class", "feature")
     
         .attr("y", function(d) { return height - yScale(d.numberOfFeatures); } )
-        .attr("height", function(d) { return yScale(d.numberOfFeatures); })
+        .attr("height", function(d) { return yScale(d.numberOfFeatures); });
 
 var fixedBugs = svg.selectAll(".fixed-bug")
-    .data(months[month]).enter()
+    .data(months[month])
+    .enter()
       .append("rect")
         .attr("x", function(d) { return xScale(d.project) + 40 } ) 
         .attr("width", xScale.rangeBand() - 80) 
@@ -41,17 +43,18 @@ var fixedBugs = svg.selectAll(".fixed-bug")
         .attr("class", "fixed-bug")
     
         .attr("y", function(d) { return height - ( yScale(d.numberOfFeatures) + yScale(d.fixedBugs) ) } )//TODO - make it on top of the other one
-        .attr("height", function(d) { return yScale(d.fixedBugs); })    
+        .attr("height", function(d) { return yScale(d.fixedBugs); }); 
 
 var unfixedBugs = svg.selectAll(".unfixed-bug")
-    .data(months[month]).enter() 
+    .data(months[month])
+    .enter() 
       .append("circle")
         .style("fill", "red")
         .attr("class", "unfixed-bug")
         .attr("cx", function(d) { return xScale(d.project) + 70;  } ) 
         
         .attr("cy", function(d) { return height - ( yScale(d.numberOfFeatures) + yScale(d.fixedBugs) + 40 ); } )
-        .attr("r", function(d) { return d.unfixedBugs * 10; } ) 
+        .attr("r", function(d) { return d.unfixedBugs * 10; } );
 
 function redraw() {
   svg.selectAll(".feature")
@@ -73,7 +76,7 @@ function redraw() {
     .transition()
       .duration(1000)
     .attr("cy", function(d) { return height - ( yScale(d.numberOfFeatures) + yScale(d.fixedBugs) + 40 ); } )
-    .attr("r", function(d) { return d.unfixedBugs * 10; } ) 
+    .attr("r", function(d) { return d.unfixedBugs * 10; });
 }
 
 setInterval(function() {

@@ -50,36 +50,34 @@ numberOfFeatures: 4,
     fixedBugs: 4, 
     unfixedBugs: 4
 }
-]
-];
-/*
+],
 
 [
 
 {
     project: "A",
-    numberOfFeatures: [1, 1, 1],
-    fixedBugs: [1, 2, 3, 4, 5], 
-    unfixedBugs: [1, 1, 1, 1] 
+    numberOfFeatures: 3,
+    fixedBugs: 5, 
+    unfixedBugs: 4 
  }, 
 {
 project: "C",
-numberOfFeatures: [1, 1],
-    fixedBugs: [2, 3, 1, 1, 4, 5, 6, 7], 
-    unfixedBugs: [2, 3]
+numberOfFeatures: 2,
+    fixedBugs: 8, 
+    unfixedBugs: 2
 },
 {
 project: "F",
-numberOfFeatures: [1, 1, 1, 1],
-    fixedBugs: [4, 5, 6, 1], 
-    unfixedBugs: [4, 5, 6, 1]
+numberOfFeatures: 4,
+    fixedBugs: 4, 
+    unfixedBugs: 4
 },
 
 {
 project: "S",
-numberOfFeatures: [1, 1, 1, 1, 1, 1, 1, 1],
-    fixedBugs: [7, 8, 9, 10, 1, 1], 
-    unfixedBugs: [7, 8]
+numberOfFeatures: 8,
+    fixedBugs: 5,
+    unfixedBugs: 2
 }
 ], 
 
@@ -87,29 +85,29 @@ numberOfFeatures: [1, 1, 1, 1, 1, 1, 1, 1],
 
 {
     project: "A",
-    numberOfFeatures: [1, 1, 1, 1, 1, 1, 1],
-    fixedBugs: [1, 2, 3, 4, 5, 1, 1, 1], 
-    unfixedBugs: [1, 1] 
+    numberOfFeatures: 6,
+    fixedBugs: 8, 
+    unfixedBugs: 2 
  }, 
 {
 project: "C",
-numberOfFeatures: [1, 1, 1, 1, 1, 1],
-    fixedBugs: [2, 3, 4, 5, 6, 7, 1, 1], 
-    unfixedBugs: [2, 3, 1, 1]
+numberOfFeatures: 3,
+    fixedBugs: 8, 
+    unfixedBugs: 7
 },
 {
 project: "F",
-numberOfFeatures: [1, 1, 1,1],
-    fixedBugs: [4, 5, 6, 1], 
-    unfixedBugs: [4, 5, 6, 1]
+numberOfFeatures: 4,
+    fixedBugs: 4,  
+    unfixedBugs: 4
 },
 
 {
 project: "S",
-numberOfFeatures: [1, 1, 1, 1],
-    fixedBugs: [7, 8, 9, 10], 
-    unfixedBugs: [7, 8, 9, 10]
+numberOfFeatures: 4,
+    fixedBugs: 9, 
+    unfixedBugs: 8
 }
 ]
 ];
-*/
+
