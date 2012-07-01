@@ -38,9 +38,8 @@ function sort_data() {
 
     console.log("before sort", sortedData.join(" , "));
     var anotherArray = sortedData.sort(function(a, b) {
-        console.log("testing ", a.toString(), " against ", b.toString(), " returning", a.year > b.year);
-
-        return a.year > b.year;}
+        if (a.year === b.year) return a.month - b.month;
+        return a.year - b.year;}
     );
 
     console.log(sortedData.join(" , "));
